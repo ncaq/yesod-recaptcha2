@@ -1,0 +1,21 @@
+name:                yesod-recaptcha2
+version:             0.1.0.0
+synopsis:            yesod recaptcha2
+description:         recaptcha2 for yesod-form
+homepage:            https://github.com/ncaq/yesod-recaptcha2#readme
+license:             MIT
+author:              ncaq
+maintainer:          ncaq@ncaq.net
+copyright:           ncaq
+category:            Web
+extra-source-files:
+  - README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - classy-prelude-yesod
+  - http-conduit
+  - yesod-auth
+
+library:
+  source-dirs: src
