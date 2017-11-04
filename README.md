@@ -18,14 +18,3 @@ instance YesodReCaptcha App where
 ~~~hs
 <* reCaptcha
 ~~~
-
-Append to applicative form:
-
-~~~hs
-buildForm :: Form MyForm
-buildForm = renderDivs $ MyForm
-  <$> areq textField myFieldSettings Nothing
-  <* reCaptcha
-  where
-    myFieldSettings = ...
-~~~
