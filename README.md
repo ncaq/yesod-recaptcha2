@@ -9,6 +9,9 @@ instance YesodReCaptcha App where
     reCaptchaSiteKey = pure "foo"
     reCaptchaSecretKey = pure "bar"
     reCaptchaLanguage = pure Nothing
+
+    -- with specific language from https://developers.google.com/recaptcha/docs/language
+    -- reCaptchaLanguage = pure (Just "ru")
 ~~~
 
 
