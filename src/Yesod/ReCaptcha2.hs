@@ -7,7 +7,6 @@
 module Yesod.ReCaptcha2 (YesodReCaptcha(..), reCaptcha, mReCaptcha) where
 
 import           ClassyPrelude.Yesod
-import           Data.Text           (append)
 import           Network.HTTP.Simple
 import           Yesod.Auth
 
@@ -57,7 +56,7 @@ mReCaptcha = do
                       Nothing ->
                         addScriptRemote "https://www.google.com/recaptcha/api.js"
                       Just language ->
-                        addScriptRemote $ append "https://www.google.com/recaptcha/api.js?hl=" language
+                        addScriptRemote $ "https://www.google.com/recaptcha/api.js?hl=" <> language
                     siteKey <- handlerToWidget reCaptchaSiteKey
                     [whamlet|<div .g-recaptcha data-sitekey=#{siteKey}>|]
             , fvErrors = Nothing
