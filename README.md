@@ -1,17 +1,24 @@
 # yesod-recaptcha2
 
 ~~~hs
-import Import.ReCaptcha2
+import Yesod.ReCaptcha2
 ~~~
 
 ~~~hs
 instance YesodReCaptcha App where
-    reCaptchaSiteKey = return "foo"
-    reCaptchaSecretKey = return "bar"
+    reCaptchaSiteKey = pure "foo"
+    reCaptchaSecretKey = pure "bar"
+    reCaptchaLanguage = pure Nothing
+
+    -- with specific language from https://developers.google.com/recaptcha/docs/language
+    -- reCaptchaLanguage = pure (Just "ru")
 ~~~
 
+## Append to applicative form
 
 ~~~hs
-<* reCaptcha
+buildForm :: Form MyForm
+buildForm = renderDivs $ MyForm
+  <$> areq textField "foo" Nothing
+  <* reCaptcha
 ~~~
-

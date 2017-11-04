@@ -16,6 +16,7 @@ dependencies:
   - classy-prelude-yesod
   - http-conduit
   - yesod-auth
+  - text
 
 library:
   source-dirs: src

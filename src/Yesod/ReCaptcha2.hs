@@ -7,15 +7,18 @@
 module Yesod.ReCaptcha2 (YesodReCaptcha(..), reCaptcha, mReCaptcha) where
 
 import           ClassyPrelude.Yesod
+import           Data.Text           (append)
 import           Network.HTTP.Simple
 import           Yesod.Auth
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
 class YesodAuth site => YesodReCaptcha site where
     reCaptchaSiteKey :: HandlerT site IO Text
-    reCaptchaSiteKey = return "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+    reCaptchaSiteKey = pure "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
     reCaptchaSecretKey :: HandlerT site IO Text
-    reCaptchaSecretKey = return "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+    reCaptchaSecretKey = pure "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+    reCaptchaLanguage :: HandlerT site IO (Maybe Text)
+    reCaptchaLanguage = pure Nothing
 
 data SiteverifyResponse = SiteverifyResponse { success :: Bool }
     deriving (Eq, Ord, Read, Show, Generic, FromJSON, ToJSON)
@@ -49,7 +52,12 @@ mReCaptcha = do
             , fvTooltip = Nothing
             , fvId = ""
             , fvInput = do
-                    addScriptRemote "https://www.google.com/recaptcha/api.js"
+                    language <- handlerToWidget reCaptchaLanguage
+                    case language of
+                      Nothing ->
+                        addScriptRemote "https://www.google.com/recaptcha/api.js"
+                      Just language ->
+                        addScriptRemote $ append "https://www.google.com/recaptcha/api.js?hl=" language
                     siteKey <- handlerToWidget reCaptchaSiteKey
                     [whamlet|<div .g-recaptcha data-sitekey=#{siteKey}>|]
             , fvErrors = Nothing
