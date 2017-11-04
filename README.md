@@ -1,5 +1,7 @@
 # yesod-recaptcha2
 
+![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)
+
 ~~~hs
 import Yesod.ReCaptcha2
 ~~~
