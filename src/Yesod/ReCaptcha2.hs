@@ -15,6 +15,8 @@ class YesodAuth site => YesodReCaptcha site where
     reCaptchaSiteKey = pure "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
     reCaptchaSecretKey :: HandlerT site IO Text
     reCaptchaSecretKey = pure "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
+    -- | with specific language from <https://developers.google.com/recaptcha/docs/language>
+    -- > reCaptchaLanguage = pure (Just "ru")
     reCaptchaLanguage :: HandlerT site IO (Maybe Text)
     reCaptchaLanguage = pure Nothing
 
