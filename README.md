@@ -14,7 +14,11 @@ instance YesodReCaptcha App where
     -- reCaptchaLanguage = pure (Just "ru")
 ~~~
 
+## Append to applicative form
 
 ~~~hs
-<* reCaptcha
+buildForm :: Form MyForm
+buildForm = renderDivs $ MyForm
+  <$> areq textField "foo" Nothing
+  <* reCaptcha
 ~~~
