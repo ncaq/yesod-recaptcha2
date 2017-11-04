@@ -3,7 +3,6 @@
 {-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes       #-}
-{-# LANGUAGE TemplateHaskell   #-}
 module Yesod.ReCaptcha2 (YesodReCaptcha(..), reCaptcha, mReCaptcha) where
 
 import           ClassyPrelude.Yesod
@@ -19,7 +18,10 @@ class YesodAuth site => YesodReCaptcha site where
     reCaptchaLanguage :: HandlerT site IO (Maybe Text)
     reCaptchaLanguage = pure Nothing
 
-data SiteverifyResponse = SiteverifyResponse { success :: Bool }
+newtype SiteverifyResponse
+    = SiteverifyResponse
+    { success :: Bool
+    }
     deriving (Eq, Ord, Read, Show, Generic, FromJSON, ToJSON)
 
 -- | for Applicative style form
@@ -34,10 +36,10 @@ mReCaptcha = do
   where formResult = do
             postParam <- lookupPostParam "g-recaptcha-response"
             case postParam of
-                Nothing -> return $ FormMissing
+                Nothing -> return FormMissing
                 Just response -> do
                     secret <- reCaptchaSecretKey
-                    s@SiteverifyResponse { success } <- liftIO $ do
+                    SiteverifyResponse{success} <- liftIO $ do
                         req <- parseRequest "POST https://www.google.com/recaptcha/api/siteverify"
                         res <- httpJSON $
                             setRequestBodyURLEncoded
@@ -51,12 +53,12 @@ mReCaptcha = do
             , fvTooltip = Nothing
             , fvId = ""
             , fvInput = do
-                    language <- handlerToWidget reCaptchaLanguage
-                    case language of
+                    mReCaptchaLanguage <- handlerToWidget reCaptchaLanguage
+                    case mReCaptchaLanguage of
                       Nothing ->
                         addScriptRemote "https://www.google.com/recaptcha/api.js"
-                      Just language ->
-                        addScriptRemote $ "https://www.google.com/recaptcha/api.js?hl=" <> language
+                      Just hl ->
+                        addScriptRemote $ "https://www.google.com/recaptcha/api.js?hl=" <> hl
                     siteKey <- handlerToWidget reCaptchaSiteKey
                     [whamlet|<div .g-recaptcha data-sitekey=#{siteKey}>|]
             , fvErrors = Nothing
