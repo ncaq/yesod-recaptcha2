@@ -7,9 +7,9 @@
 module Yesod.ReCaptcha2 (YesodReCaptcha(..), reCaptcha, mReCaptcha) where
 
 import           ClassyPrelude.Yesod
+import           Data.Text           (append)
 import           Network.HTTP.Simple
 import           Yesod.Auth
-import           Data.Text (append)
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
 class YesodAuth site => YesodReCaptcha site where
