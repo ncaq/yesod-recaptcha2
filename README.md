@@ -2,6 +2,8 @@
 
 ![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)
 
+[hackage](https://hackage.haskell.org/package/yesod-recaptcha2)
+
 ~~~hs
 import Yesod.ReCaptcha2
 ~~~
