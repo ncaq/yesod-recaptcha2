@@ -1,13 +1,14 @@
 # yesod-recaptcha2
 
 ~~~hs
-import Import.ReCaptcha2
+import Yesod.ReCaptcha2
 ~~~
 
 ~~~hs
 instance YesodReCaptcha App where
-    reCaptchaSiteKey = return "foo"
-    reCaptchaSecretKey = return "bar"
+    reCaptchaSiteKey = pure "foo"
+    reCaptchaSecretKey = pure "bar"
+    reCaptchaLanguage = pure Nothing
 ~~~
 
 
@@ -15,3 +16,13 @@ instance YesodReCaptcha App where
 <* reCaptcha
 ~~~
 
+Append to applicative form:
+
+~~~hs
+buildForm :: Form MyForm
+buildForm = renderDivs $ MyForm
+  <$> areq textField myFieldSettings Nothing
+  <* reCaptcha
+  where
+    myFieldSettings = ...
+~~~
