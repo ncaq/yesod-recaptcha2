@@ -11,14 +11,14 @@ import           Yesod.Auth
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
 class YesodAuth site => YesodReCaptcha site where
-    reCaptchaSiteKey :: HandlerT site IO Text
+    reCaptchaSiteKey :: HandlerFor site Text
     reCaptchaSiteKey = pure "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-    reCaptchaSecretKey :: HandlerT site IO Text
+    reCaptchaSecretKey :: HandlerFor site Text
     reCaptchaSecretKey = pure "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
     -- | with specific language from <https://developers.google.com/recaptcha/docs/language>
     --
     -- > reCaptchaLanguage = pure (Just "ru")
-    reCaptchaLanguage :: HandlerT site IO (Maybe Text)
+    reCaptchaLanguage :: HandlerFor site (Maybe Text)
     reCaptchaLanguage = pure Nothing
 
 newtype SiteverifyResponse
@@ -28,11 +28,11 @@ newtype SiteverifyResponse
     deriving (Eq, Ord, Read, Show, Generic, FromJSON, ToJSON)
 
 -- | for Applicative style form
-reCaptcha :: YesodReCaptcha site => AForm (HandlerT site IO) ()
+reCaptcha :: YesodReCaptcha site => AForm (HandlerFor site) ()
 reCaptcha = formToAForm mReCaptcha
 
 -- | for Monadic style form
-mReCaptcha :: YesodReCaptcha site => MForm (HandlerT site IO) (FormResult (), [FieldView site])
+mReCaptcha :: YesodReCaptcha site => MForm (HandlerFor site) (FormResult (), [FieldView site])
 mReCaptcha = do
     result <- lift formResult
     return (result, [fieldViewSite])
