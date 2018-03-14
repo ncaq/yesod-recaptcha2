@@ -34,7 +34,7 @@ reCaptcha = formToAForm mReCaptcha
 -- | for Monadic style form
 mReCaptcha :: YesodReCaptcha site => MForm (HandlerT site IO) (FormResult (), [FieldView site])
 mReCaptcha = do
-    result <- liftHandlerT formResult
+    result <- lift formResult
     return (result, [fieldViewSite])
   where formResult = do
             postParam <- lookupPostParam "g-recaptcha-response"
