@@ -3,7 +3,12 @@
 {-# LANGUAGE NamedFieldPuns    #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes       #-}
-module Yesod.ReCaptcha2 (YesodReCaptcha(..), reCaptcha, mReCaptcha) where
+module Yesod.ReCaptcha2 
+    ( YesodReCaptcha(..)
+      -- * ReCaptcha V2
+    , reCaptcha
+    , mReCaptcha
+    ) where
 
 import           ClassyPrelude.Yesod
 import           Network.HTTP.Simple
