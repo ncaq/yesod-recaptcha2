@@ -4,7 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE QuasiQuotes       #-}
 {-# LANGUAGE TupleSections     #-}
-module Yesod.ReCaptcha2 
+module Yesod.ReCaptcha2
     ( YesodReCaptcha(..)
       -- * ReCaptcha V2
     , reCaptcha
@@ -80,7 +80,7 @@ mReCaptcha = do
             }
 
 -- $invisibleReCaptcha
--- 
+--
 -- The Invisible ReCaptcha is not as easy as the V2.
 --
 -- 1. Function to check the response: 'reCaptchaInvisible' or 'mReCaptchaInvisible'.
@@ -96,7 +96,7 @@ mReCaptcha = do
 --     \<form \#\#{reCaptchaFormId} method=post action=@{route} enctype=#{enctype}\>
 --       ^{widget}
 --       ^{reCaptchaWidget}
---     
+--
 --       \<button .g-recaptcha *{reCaptchaButtonAttributes}\>
 --         Submit
 --     @
@@ -110,8 +110,8 @@ mReCaptchaInvisible :: YesodReCaptcha site => MForm (HandlerFor site) (FormResul
 mReCaptchaInvisible = fst <$> mReCaptcha
 
 -- | generate all required parts (except the check) for a Invisible ReCaptcha
-reCaptchaInvisibleForm 
-    :: YesodReCaptcha site 
+reCaptchaInvisibleForm
+    :: YesodReCaptcha site
     => Maybe Text -- ^ The id of the form, a new will be created when 'Nothing' is passed
     -> Maybe Text -- ^ The javascript to call after a successful captcha, it has to submit the form, a simple one will be generated when 'Nothing' is passed
     -> HandlerFor site (Text, WidgetFor site (), [(Text, Text)])
