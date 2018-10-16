@@ -26,7 +26,8 @@ class YesodAuth site => YesodReCaptcha site where
     reCaptchaSiteKey = pure "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
     reCaptchaSecretKey :: HandlerFor site Text
     reCaptchaSecretKey = pure "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-    -- | with specific language from <https://developers.google.com/recaptcha/docs/language>
+    -- | with specific language from
+    -- <https://developers.google.com/recaptcha/docs/language>
     --
     -- > reCaptchaLanguage = pure (Just "ru")
     reCaptchaLanguage :: HandlerFor site (Maybe Text)
@@ -43,7 +44,9 @@ reCaptcha :: YesodReCaptcha site => AForm (HandlerFor site) ()
 reCaptcha = formToAForm mReCaptcha
 
 -- | for Monadic style form
-mReCaptcha :: YesodReCaptcha site => MForm (HandlerFor site) (FormResult (), [FieldView site])
+mReCaptcha
+  :: YesodReCaptcha site =>
+  MForm (HandlerFor site) (FormResult (), [FieldView site])
 mReCaptcha = do
     result <- lift formResult
     return (result, [fieldViewSite])
@@ -54,10 +57,15 @@ mReCaptcha = do
                 Just response -> do
                     secret <- reCaptchaSecretKey
                     SiteverifyResponse{success} <- liftIO $ do
-                        req <- parseRequest "POST https://www.google.com/recaptcha/api/siteverify"
+                        req <-
+                          parseRequest
+                          "POST https://www.google.com/recaptcha/api/siteverify"
                         res <- httpJSON $
                             setRequestBodyURLEncoded
-                            [("secret", encodeUtf8 secret), ("response", encodeUtf8 response)] req
+                            [ ("secret", encodeUtf8 secret)
+                            , ("response", encodeUtf8 response)
+                            ]
+                            req
                         return $ getResponseBody res
                     return $ if success
                         then FormSuccess ()
@@ -72,7 +80,8 @@ mReCaptcha = do
                       Nothing ->
                         addScriptRemote "https://www.google.com/recaptcha/api.js"
                       Just hl ->
-                        addScriptRemote $ "https://www.google.com/recaptcha/api.js?hl=" <> hl
+                        addScriptRemote $
+                        "https://www.google.com/recaptcha/api.js?hl=" <> hl
                     siteKey <- handlerToWidget reCaptchaSiteKey
                     [whamlet|<div .g-recaptcha data-sitekey=#{siteKey}>|]
             , fvErrors = Nothing
@@ -87,7 +96,8 @@ mReCaptcha = do
 --
 -- 2. Add the following to the code which creates the form:
 --
---     > (reCaptchaFormId, reCaptchaWidget, reCaptchaButtonAttributes) <- reCaptchaInvisibleForm Nothing
+--     > (reCaptchaFormId, reCaptchaWidget, reCaptchaButtonAttributes) <-
+--     > reCaptchaInvisibleForm Nothing
 --
 -- 3. Add the id to the form, class and attributes to the button and the widget somewhere.
 --    Example:
@@ -106,14 +116,17 @@ reCaptchaInvisible :: YesodReCaptcha site => AForm (HandlerFor site) ()
 reCaptchaInvisible = formToAForm ((,[]) <$> mReCaptchaInvisible)
 
 -- | check for Monadic style form
-mReCaptchaInvisible :: YesodReCaptcha site => MForm (HandlerFor site) (FormResult ())
+mReCaptchaInvisible
+  :: YesodReCaptcha site => MForm (HandlerFor site) (FormResult ())
 mReCaptchaInvisible = fst <$> mReCaptcha
 
 -- | generate all required parts (except the check) for a Invisible ReCaptcha
 reCaptchaInvisibleForm
     :: YesodReCaptcha site
     => Maybe Text -- ^ The id of the form, a new will be created when 'Nothing' is passed
-    -> Maybe Text -- ^ The javascript to call after a successful captcha, it has to submit the form, a simple one will be generated when 'Nothing' is passed
+    -> Maybe Text
+    -- ^ The javascript to call after a successful captcha,
+    -- it has to submit the form, a simple one will be generated when 'Nothing' is passed
     -> HandlerFor site (Text, WidgetFor site (), [(Text, Text)])
 reCaptchaInvisibleForm mIdent mScript = do
     mReCaptchaLanguage <- reCaptchaLanguage
@@ -128,7 +141,9 @@ reCaptchaInvisibleForm mIdent mScript = do
           Just hl ->
             addScriptRemote $ "https://www.google.com/recaptcha/api.js?hl=" <> hl
         when (isNothing mScript) $
-          toWidgetHead [hamlet|<script>function #{scriptName}(token) { document.getElementById("#{identForm}").submit(); } |]
+          toWidgetHead [hamlet|
+<script>function #{scriptName}(token) { document.getElementById("#{identForm}").submit(); }
+|]
     return
       ( identForm
       , widget
