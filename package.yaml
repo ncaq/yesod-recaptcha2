@@ -9,13 +9,13 @@ maintainer:          ncaq@ncaq.net
 copyright:           © ncaq
 category:            Web
 extra-source-files:
-  - README.md
+- README.md
 
 dependencies:
-  - base >= 4.7 && < 5
-  - classy-prelude-yesod
-  - http-conduit
-  - yesod-auth
+- base >= 4.7 && < 5
+- classy-prelude-yesod
+- http-conduit
+- yesod-auth
 
 library:
   source-dirs: src
