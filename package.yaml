@@ -13,9 +13,12 @@ extra-source-files:
 
 dependencies:
 - base >= 4.7 && < 5
-- classy-prelude-yesod
+- aeson
+- classy-prelude
 - http-conduit
 - yesod-auth
+- yesod-core
+- yesod-form
 
 library:
   source-dirs: src
