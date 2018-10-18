@@ -16,9 +16,15 @@ module Yesod.ReCaptcha2
     , reCaptchaInvisibleForm
     ) where
 
-import           ClassyPrelude.Yesod
+import           ClassyPrelude
+import           Data.Aeson
 import           Network.HTTP.Simple
 import           Yesod.Auth
+import           Yesod.Core.Handler
+import           Yesod.Core.Types
+import           Yesod.Core.Widget
+import           Yesod.Form.Functions
+import           Yesod.Form.Types
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
 class YesodAuth site => YesodReCaptcha site where
