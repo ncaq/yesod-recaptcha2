@@ -10,6 +10,9 @@ copyright:           © ncaq
 category:            Web
 extra-source-files:
 - README.md
+ghc-options:
+- -Wall
+- -fwarn-tabs
 
 dependencies:
 - base >= 4.7 && < 5
