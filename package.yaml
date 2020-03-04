@@ -1,27 +1,42 @@
-name:                yesod-recaptcha2
-version:             0.3.0
-synopsis:            yesod recaptcha2
-description:         recaptcha2 for yesod-form
-github:              ncaq/yesod-recaptcha2
-license:             MIT
-author:              ncaq
-maintainer:          ncaq@ncaq.net
-copyright:           © ncaq
-category:            Web
+name: yesod-recaptcha2
+version: 1.0.0
+synopsis: yesod recaptcha2
+description: recaptcha2 for yesod-form
+github: ncaq/yesod-recaptcha2
+license: MIT
+author: ncaq
+maintainer: ncaq@ncaq.net
+copyright: © ncaq
+category: Web
 extra-source-files:
-- README.md
+  - README.md
+
 ghc-options:
-- -Wall
-- -fwarn-tabs
+  - -Wall
+  # - -Wall-missed-specialisations
+  - -Widentities
+  # - -Wimplicit-prelude
+  - -Wincomplete-record-updates
+  - -Wincomplete-uni-patterns
+  # - -Wmissed-specialisations
+  # - -Wmissing-export-lists
+  - -Wmissing-exported-signatures
+  - -Wmissing-home-modules
+  # - -Wmissing-import-lists
+  # - -Wmissing-local-signatures
+  # - -Wmonomorphism-restriction
+  # - -Wpartial-fields
+  - -Wredundant-constraints
+  - -Wcompat
 
 dependencies:
-- base >= 4.7 && < 5
-- aeson
-- classy-prelude
-- http-conduit
-- yesod-auth
-- yesod-core
-- yesod-form
+  - base >= 4.7 && < 5
+  - aeson
+  - classy-prelude
+  - http-conduit
+  - yesod-auth
+  - yesod-core
+  - yesod-form
 
 library:
   source-dirs: src
