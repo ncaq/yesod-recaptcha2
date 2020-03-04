@@ -21,9 +21,6 @@ import           Data.Aeson
 import           Network.HTTP.Simple
 import           Yesod.Auth
 import           Yesod.Core
-import           Yesod.Core.Handler
-import           Yesod.Core.Types
-import           Yesod.Core.Widget
 import           Yesod.Form.Functions
 import           Yesod.Form.Types
 
