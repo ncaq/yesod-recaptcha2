@@ -20,13 +20,12 @@ where
 import           ClassyPrelude
 import           Data.Aeson
 import           Network.HTTP.Simple
-import           Yesod.Auth
 import           Yesod.Core
 import           Yesod.Form.Functions
 import           Yesod.Form.Types
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
-class YesodAuth site => YesodReCaptcha site where
+class YesodReCaptcha site where
   reCaptchaSiteKey :: HandlerFor site Text
   reCaptchaSiteKey = pure "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
   reCaptchaSecretKey :: HandlerFor site Text

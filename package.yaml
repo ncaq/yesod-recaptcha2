@@ -34,7 +34,6 @@ dependencies:
   - aeson
   - classy-prelude
   - http-conduit
-  - yesod-auth
   - yesod-core
   - yesod-form
 
