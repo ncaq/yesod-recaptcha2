@@ -1,9 +1,7 @@
 # yesod-recaptcha2
 
-![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)
+[![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)](https://hackage.haskell.org/package/yesod-recaptcha2)
 [![Build Status](https://travis-ci.org/ncaq/yesod-recaptcha2.svg?branch=master)](https://travis-ci.org/ncaq/yesod-recaptcha2)
-
-[hackage](https://hackage.haskell.org/package/yesod-recaptcha2)
 
 ~~~hs
 import Yesod.ReCaptcha2
