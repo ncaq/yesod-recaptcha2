@@ -14,15 +14,21 @@ module Yesod.ReCaptcha2
   , reCaptchaInvisible
   , mReCaptchaInvisible
   , reCaptchaInvisibleForm
-  )
-where
+  ) where
 
-import           ClassyPrelude
-import           Data.Aeson
-import           Network.HTTP.Simple
-import           Yesod.Core
-import           Yesod.Form.Functions
-import           Yesod.Form.Types
+import           Control.Monad         (when)
+import           Data.Maybe            (isNothing)
+import           Data.String.Transform (ToByteStringStrict (toByteStringStrict))
+import           Data.Text             (Text)
+import           GHC.Generics          (Generic)
+import           Network.HTTP.Simple   (getResponseBody, httpJSON, parseRequest,
+                                        setRequestBodyURLEncoded)
+import           Yesod.Core            (FromJSON, HandlerFor, MonadIO (liftIO), MonadTrans (lift),
+                                        ToJSON, ToWidgetHead (toWidgetHead), WidgetFor,
+                                        addScriptRemote, hamlet, handlerToWidget, lookupPostParam,
+                                        newIdent, whamlet)
+import           Yesod.Form.Functions  (formToAForm)
+import           Yesod.Form.Types      (AForm, FieldView (..), FormResult (..), MForm)
 
 -- | default key is testing. you should impl reCaptchaSiteKey and reCaptchaSecretKey
 class YesodReCaptcha site where
@@ -65,7 +71,7 @@ mReCaptcha = do
           req <- parseRequest
             "POST https://www.google.com/recaptcha/api/siteverify"
           res <- httpJSON $ setRequestBodyURLEncoded
-            [("secret", encodeUtf8 secret), ("response", encodeUtf8 response)]
+            [("secret", toByteStringStrict secret), ("response", toByteStringStrict response)]
             req
           return $ getResponseBody res
         return $ if success
