@@ -1,6 +1,7 @@
 # yesod-recaptcha2
 
 [![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)](https://hackage.haskell.org/package/yesod-recaptcha2)
+[![yesod-recaptcha2 on Stackage LTS](http://stackage.org/package/yesod-recaptcha2/badge/lts)](http://stackage.org/lts/package/yesod-recaptcha2)
 [![test](https://github.com/ncaq/yesod-recaptcha2/actions/workflows/test.yml/badge.svg)](https://github.com/ncaq/yesod-recaptcha2/actions/workflows/test.yml)
 
 It support new Google
