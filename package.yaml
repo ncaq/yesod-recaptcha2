@@ -1,5 +1,5 @@
 name: yesod-recaptcha2
-version: 1.0.2
+version: 1.0.2.0
 synopsis: yesod recaptcha2
 description: It support new Google reCAPTCHA(v2, v3) for yesod-form instead yesod-recaptcha beacuse original yesod-recaptcha is dead.
 github: ncaq/yesod-recaptcha2
