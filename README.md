@@ -1,7 +1,7 @@
 # yesod-recaptcha2
 
 [![Hackage](https://img.shields.io/hackage/v/yesod-recaptcha2.svg)](https://hackage.haskell.org/package/yesod-recaptcha2)
-![CircleCI](https://img.shields.io/circleci/build/github/ncaq/yesod-recaptcha2)
+[![test](https://github.com/ncaq/yesod-recaptcha2/actions/workflows/test.yml/badge.svg)](https://github.com/ncaq/yesod-recaptcha2/actions/workflows/test.yml)
 
 It support new Google
 [reCAPTCHA(v2, v3)](https://www.google.com/recaptcha/about/)
