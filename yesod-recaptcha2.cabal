@@ -1,11 +1,11 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.4.
+-- This file has been generated from package.yaml by hpack version 0.35.2.
 --
 -- see: https://github.com/sol/hpack
 
 name:           yesod-recaptcha2
-version:        1.0.2
+version:        1.0.2.0
 synopsis:       yesod recaptcha2
 description:    It support new Google reCAPTCHA(v2, v3) for yesod-form instead yesod-recaptcha beacuse original yesod-recaptcha is dead.
 category:       Web
